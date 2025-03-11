@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>404 Error</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link
+			rel="shortcut icon"
+			href="/error-pages/images/favicon-6ee220ee8e.ico"
+			type="image/x-icon"
+		/>
+		<link
+			rel="preload"
+			as="image"
+			href="/error-pages/images/bg-image-eb0f79e067.jpg"
+		/>
+		<link
+			rel="preload"
+			as="image"
+			href="/error-pages/images/logo-onenews-8c972cf81b.svg"
+		/>
+		<link rel="preload" as="image" href="/error-pages/images/oops-image-9b852c8dd8.png" />
+		<link rel="preload" as="image" href="/error-pages/images/logo-tvnzod-177207d25f.svg" />
+		<link
+			rel="preload"
+			as="font"
+			href="/error-pages/fonts/BlackSans-Bold.otf"
+			type="font/woff"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			as="font"
+			href="/error-pages/fonts/BlackSans-Regular.otf"
+			type="font/woff"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			as="font"
+			href="/error-pages/fonts/BlackSans-Light.otf"
+			type="font/woff"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			as="font"
+			href="/error-pages/fonts/BlackSans-SemiBold.otf"
+			type="font/woff"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="/error-pages/css/bootstrap-6d0390c053.css" />
+		<link rel="stylesheet" href="/error-pages/css/solid-82bed77a17.css" />
+		<link rel="stylesheet" href="/error-pages/css/fontawesome-17000cf1b3.css" />
+		<link rel="stylesheet" href="/error-pages/css/style-nav-b6af79728d.css" />
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="/error-pages/js/script-aaf4aaf4e2.js"></script>
+		<script src="/error-pages/js/bootstrap-6842d7ce13.js"></script>
+	</head>
+
+	<body id="bootstrap-override">
+		<div style="overflow-x: hidden">
+			<nav
+				class="navbar navbar-expand-lg navbar-dark d-flex pt-0 pb-0 align-items-stretch"
+				id="navbar"
+			>
+				<button class="navbar-toggler" type="button" onclick="openNav()">
+					<i class="fas fa-bars"></i>
+				</button>
+
+				<div class="mx-auto">
+					<a class="navbar-brand position-relative" href="/">
+						<img
+							class="logo-tvnzod"
+							src="/error-pages/images/logo-tvnzod-177207d25f.svg"
+						/>
+						<span class="img-helper"></span>
+					</a>
+				</div>
+
+				<div
+					class="navbar-collapse d-flex flex-column flex-lg-row order-4"
+					id="nav-content"
+				>
+					<ul class="navbar-nav mr-auto d-lg-flex order-6">
+						<li class="nav-item">
+							<a class="nav-link" href="/">Home</a>
+						</li>
+
+						<li class="nav-item dropdown position-static">
+							<a class="nav-link" href="/livetv"
+								>Live TV & Guide<span class="d-lg-none">&nbsp;</span>
+								<i class="fas d-lg-none fa-chevron-down"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz has-image"
+										href="/livetv/tvnz-1"
+									>
+										<img src="/error-pages/images/icon-tv1-ab395ee701.png" />
+										TVNZ 1
+									</a>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz has-image"
+										href="/livetv/tvnz-2"
+									>
+										<img src="/error-pages/images/icon-tv2-d54f146ac2.png" />
+										TVNZ 2
+									</a>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz has-image"
+										href="/livetv/tvnz-duke"
+									>
+										<img src="/error-pages/images/icon-duke-750af13aa6.png" />
+										TVNZ DUKE
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item badge badge-tvnz" href="/livetv"
+										>TVNZ Guide</a
+									>
+								</li>
+							</ul>
+						</li>
+
+						<li class="nav-item dropdown position-static">
+							<a class="nav-link" href="/shows"
+								>Categories<span class="d-lg-none">&nbsp;</span>
+								<i class="fas d-lg-none fa-chevron-down"></i
+							></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/my-favourites"
+									>
+										<i class="icon-favourites">
+											<svg class="icon-favourites" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path fill="#006AFF" d="M15.8947 5.98656C15.6904 5.32278 15.1196 4.85792 14.4561 4.81485L10.8801 4.54888L9.50992 1.06969C9.25658 0.422533 8.65583 0 7.98907 0C7.32231 0 6.72157 0.422533 6.46822 1.06969L5.09809 4.55607L1.53574 4.82204C0.868402 4.86835 0.294297 5.33419 0.0837085 6.00026C-0.12688 6.66633 0.0680174 7.39987 0.576644 7.85554L3.31691 10.2493L2.51538 13.8507C2.37838 14.3576 2.47466 14.9026 2.77571 15.3243C3.08467 15.7473 3.5626 15.9967 4.07049 16C4.37749 15.9995 4.67761 15.9046 4.93367 15.7268L7.95482 13.75L10.9897 15.7053C11.2504 15.8914 11.5581 15.9915 11.8734 15.9928C12.362 15.9893 12.8228 15.7541 13.1271 15.353C13.4537 14.9417 13.5824 14.3959 13.4765 13.8722L12.6338 10.278L15.4426 7.86992C15.9548 7.40372 16.1353 6.65172 15.8947 5.98656Z" />
+											</svg>
+										</i>
+										My Favourites
+									</a>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/whats-new"
+										>What's New</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/full-seasons"
+										>Full Seasons</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/drama"
+										>Drama</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/reality"
+										>Reality</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/factual"
+										>Documentary & Factual</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/comedy"
+										>Comedy</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/local"
+										>Local</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/sci-fi-and-fantasy"
+										>Sci-Fi & Fantasy</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/movies"
+										>Movies</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/natural-world"
+										>Natural World</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/news"
+										>News & Current Affairs</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/sport"
+										>Sport</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/food"
+										>Food</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/kids"
+										>Kids</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/preschool"
+										>Preschool</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/tvnz-1"
+										>TVNZ 1</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/tvnz-2"
+										>TVNZ 2</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/tvnz-duke"
+										>TVNZ DUKE</a
+									>
+								</li>
+								<li>
+									<a
+										class="dropdown-item badge badge-tvnz"
+										href="/categories/all"
+										>A-Z</a
+									>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://www.1news.co.nz"
+								><img
+									src="/error-pages/images/logo-onenews-8c972cf81b.svg"
+									class="align-content-center"
+									width="75"
+									height="25"
+							/></a>
+						</li>
+					</ul>
+				</div>
+				<button id="sidebar-close" onclick="closeNav()">
+					<i class="fas fa-times"></i>
+				</button>
+
+
+			</nav>
+
+			<div class="row content-wrapper">
+				<div class="container">
+					<div class="col content">
+						<img src="/error-pages/images/oops-image-9b852c8dd8.png" class="error-oops-illustration" />
+						<h1>The page you’re looking for cannot be found.</h1>
+						<p>
+							Check the address and spelling are correct. If you’re still encountering problems, please
+							<a href="https://helptvnz.zendesk.com/hc/en-us/requests/new">
+								Contact Us.
+							</a>
+						</p>
+						<button class="retry-button">
+							<a href="/"> BACK TO HOMEPAGE </a>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="top-button">
+				<a href="#">
+					<img src="/error-pages/images/backtotop-ed10166082.svg" alt="Top" />
+					<i class="fas fa-chevron-up d-none"></i>
+				</a>
+			</div>
+
+			<footer id="footer" class="col">
+				<div id="footer-main" class="row mx-auto justify-content-center">
+					<div class="col-10">
+						<div class="row mx-auto flex-column flex-lg-row">
+							<div class="col">
+								<div
+									class="row justify-content-center pb-4 justify-content-lg-start pb-lg-0"
+								>
+									<a href="/"
+										><img width="140" src="/error-pages/images/logo-tvnzod-177207d25f.svg"
+									/></a>
+								</div>
+							</div>
+							<div class="col">
+								<div
+									class="row justify-content-center justify-content-lg-start footer-title"
+								>
+									TVNZ ONDEMAND APPS
+								</div>
+								<div
+									class="row pb-4 pb-lg-0 justify-content-center justify-content-lg-start row-icon"
+								>
+									<a
+										href="https://itunes.apple.com/nz/app/tvnz-ondemand/id592636641"
+										><i class="icon-apple"></i
+									></a>
+									<a
+										href="https://play.google.com/store/apps/details?id=nz.co.tvnz.ondemand.phone.android"
+										><i class="icon-android"></i
+									></a>
+									<a
+										href="https://www.microsoft.com/en-nz/store/p/tvnz-ondemand/9nblggh69jzz"
+										><i class="icon-xbox"></i
+									></a>
+									<a
+										href="https://store.playstation.com/#!/en-nz/search/q=tvnz%20ondemand"
+										><i class="icon-playstation"></i
+									></a>
+								</div>
+							</div>
+							<div class="col">
+								<div
+									class="row justify-content-center justify-content-lg-start footer-title"
+								>
+									1 NEWS APPS
+								</div>
+								<div
+									class="row pb-4 pb-lg-0 justify-content-center justify-content-lg-start row-icon"
+								>
+									<a
+										href="https://itunes.apple.com/nz/app/1-news-now/id329786380"
+										><i class="icon-apple"></i
+									></a>
+									<a
+										href="https://play.google.com/store/apps/developer?id=Television+New+Zealand+Limited"
+										><i class="icon-android"></i
+									></a>
+								</div>
+							</div>
+							<div class="col">
+								<div
+									class="row justify-content-center justify-content-lg-start footer-title"
+								>
+									FOLLOW TVNZ
+								</div>
+								<div
+									class="row pb-4 pb-lg-0 justify-content-center justify-content-lg-start row-icon"
+								>
+									<a href="https://www.facebook.com/TVNZOndemand"
+										><i class="icon-facebook"></i
+									></a>
+									<a href="https://twitter.com/tvnz"
+										><i class="icon-twitter"></i
+									></a>
+									<a href="https://www.instagram.com/tvnz.official/"
+										><i class="icon-instagram"></i
+									></a>
+									<a href="https://www.youtube.com/user/TVNewZealand"
+										><i class="icon-youtube"></i
+									></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="footer-sub" class="row mx-auto justify-content-center">
+					<div class="col-10">
+						<div class="row d-none d-lg-flex">
+							<div class="col">
+								<div class="row footer-title">EXPLORE TVNZ</div>
+								<div class="row">
+									<a href="/">OnDemand</a>
+								</div>
+								<div class="row">
+									<a href="/livetv/tvnz-1">TVNZ 1</a>
+								</div>
+								<div class="row">
+									<a href="/livetv/tvnz-2">TVNZ 2</a>
+								</div>
+								<div class="row">
+									<a href="/livetv/tvnz-duke">TVNZ DUKE</a>
+								</div>
+								<div class="row">
+									<a href="/livetv">TVNZ Guide</a>
+								</div>
+								<div class="row">
+									<a href="https://www.renews.co.nz/">Re:</a>
+								</div>
+							</div>
+							<div class="col">
+								<div class="row footer-title">1 NEWS</div>
+								<div class="row">
+									<a href="https://www.1news.co.nz">News</a>
+								</div>
+								<div class="row">
+									<a href="https://www.1news.co.nz/sport">Sport</a>
+								</div>
+							</div>
+							<div class="col">
+								<div class="row footer-title">CORPORATE</div>
+								<div class="row">
+									<a href="https://corporate.tvnz.co.nz"
+										>About TVNZ</a
+									>
+								</div>
+								<div class="row">
+									<a href="https://careers.tvnz.co.nz/home">Careers</a>
+								</div>
+								<div class="row">
+									<a href="https://sales.tvnz.co.nz/">Sales & Advertising</a>
+								</div>
+								<div class="row">
+									<a href="http://blacksand.co.nz/">Blacksand</a>
+								</div>
+								<div class="row">
+									<a href="https://licensing.tvnz.co.nz">Licensing</a>
+								</div>
+							</div>
+							<div class="col">
+								<div class="row footer-title">MORE TVNZ</div>
+								<div class="row">
+									<a href="/ondemand/contact-us">Contact Us</a>
+								</div>
+								<div class="row">
+									<a href="/help">Help & FAQs</a>
+								</div>
+								<div class="row">
+									<a href="/ways-to-watch">Ways to Watch</a>
+								</div>
+								<div class="row">
+									<a href="https://corporate.tvnz.co.nz/house-rules/"
+										>House Rules</a
+									>
+								</div>
+								<div class="row">
+									<a href="https://tvnzgreenroom.co.nz/">The Green Room</a>
+								</div>
+							</div>
+						</div>
+						<div class="row d-flex d-lg-none">
+							<div class="col mob-center">
+								<div class="row">
+									<a href="/ondemand/contact-us">Contact Us</a>
+								</div>
+								<div class="row">
+									<a href="/help">Help & FAQs</a>
+								</div>
+								<div class="row">
+									<a href="https://corporate.tvnz.co.nz"
+										>About TVNZ</a
+									>
+								</div>
+								<div class="row">
+									<a href="https://corporate.tvnz.co.nz/house-rules/"
+										>House Rules</a
+									>
+								</div>
+								<div class="row">
+									<a href="https://careers.tvnz.co.nz/home">Careers</a>
+								</div>
+							</div>
+						</div>
+						<div class="row copyright">
+							<div class="col text-center text-lg-left">© TVNZ 2021</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
