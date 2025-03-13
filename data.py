@@ -10,8 +10,18 @@ from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
 from collections import Counter
 from PIL import Image
+import json, os
 
 
+def save_valid_samples(valid_samples, cache_file):
+    with open(cache_file, "w") as f:
+        json.dump(valid_samples, f)
+
+def load_valid_samples(cache_file):
+    if os.path.exists(cache_file):
+        with open(cache_file, "r") as f:
+            return json.load(f)
+    return None
 
 def tryloader(path):
     try:
@@ -21,31 +31,63 @@ def tryloader(path):
         print(f"This image is broken: {path} ({e})")
         return None
 
+
+"""
+Preprocess the images (load transform) and cache them as a tensor to save more time cause it takes to lonngg.
+"""  
+def preprocess_tensor(dataset, cache_path="cached_images.pt"):
+    if os.path.exists(cache_path):
+        print("Loading images from cache")
+        return torch.load(cache_path)
+    else:
+        print("Preprocessing images and chacing")
+        image_list = []
+        for img, _ in dataset:
+            image_list.append(img)
+        # Stack the images into a single tensor
+        images_tensor = torch.stack(image_list)
+        torch.save(images_tensor, cache_path)
+        return images_tensor
+
 """"
 Setup basic variables, get dataset from local folder, create dataloader, and extract labels and images for later use
+Additionally, added caching of all the valid file paths as a json file cause filtering the dataset took long, so if file exists, load from there
 """
 def setup():
     #TRANSFORM from assignment 2
-    transform = transforms.Compose([transforms.Resize(32), transforms.CenterCrop(32), transforms.ToTensor(), transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
+    global dataset, dataloader, labels, images
 
-    global dataset
+    transform = transforms.Compose([transforms.Resize(32), transforms.CenterCrop(32), transforms.ToTensor(), transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
     dataset = ImageFolder(root="./Incidents-subset", transform=transform, loader=tryloader)
+
+    cache_file = "valid_samples.json"
     valid_samples = []
-    for path, label in dataset.samples:
-        #check again?
-        img = tryloader(path)
-        if img is not None:
-            valid_samples.append((path, label))
+
+    cached = load_valid_samples(cache_file)
+    if cached is not None:
+        valid_samples = cached
+        print("Loaded valid samples from cache")
+    else:
+        #make cache file save
+        for path, label in dataset.samples:
+            if tryloader(path) is not None:
+                valid_samples.append((path, label))
+        save_valid_samples(valid_samples, cache_file)
+        print("Filtered valid samples and saved to cache")
+
+
     #ensure only valid samples remain in the dataset
+
     dataset.samples = valid_samples
     dataset.targets = [label for _, label in valid_samples]
     
-    global dataloader
-    dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
-    global labels 
+    dataloader = DataLoader(dataset, batch_size=32, shuffle=True, num_workers=4)
+    
     labels = np.array(dataset.targets)
-    global images
-    images = np.array([img for img, _ in dataset if img is not None])
+    
+    images_tensor = preprocess_tensor(dataset, cache_path="cached_images.pt")
+    #feel like i need em in np array
+    images = images_tensor.numpy()
 
 
 
