@@ -11,6 +11,7 @@ from torch.utils.data import DataLoader
 from collections import Counter
 from PIL import Image
 import json, os
+import matplotlib.pyplot as plt
 
 
 def save_valid_samples(valid_samples, cache_file):
@@ -110,6 +111,15 @@ def class_counts():
     #print the outcome
     for class_idx, count in class_counts.items():
         print(f"{dataset.classes[class_idx]}: number of images {count}, class index: {class_idx}")
+
+    plt.bar(class_counts.keys(), class_counts.values())
+    plt.title('number of samples per category')
+    #stupid xaxis labels 
+    plt.xticks(ticks=range(len(dataset.classes)), labels=dataset.classes, rotation=90)
+    plt.xlabel('classes')
+    plt.ylabel('number of samples')
+    plt.tight_layout()
+    plt.savefig("class_count_barplot.jpg")
 
 
 if __name__ == '__main__':
