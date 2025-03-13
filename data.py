@@ -119,7 +119,7 @@ def class_counts():
     plt.xlabel('classes')
     plt.ylabel('number of samples')
     plt.tight_layout()
-    plt.savefig("class_count_barplot.jpg")
+    plt.savefig("Images/class_count_barplot.jpg")
 
 
 if __name__ == '__main__':
