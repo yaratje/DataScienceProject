@@ -24,6 +24,12 @@ def load_valid_samples(cache_file):
             return json.load(f)
     return None
 
+"""
+Loader function used as loader in ImageFolder, ensures images path is vallid and converts image to rgb format and returns
+If path is not valid (mostly files starting with .) then return None
+@path, filepath where the dataset is located
+"""
+
 def tryloader(path):
     try:
         #see if the image is actually an image, also convert to RGB yaknow to be safe
@@ -34,7 +40,7 @@ def tryloader(path):
 
 
 """
-Preprocess the images (load transform) and cache them as a tensor to save more time cause it takes to lonngg.
+Preprocess the images (load transform) and cache them as a tensor to save more time cause it takes to lonngg to transform every time.
 """  
 def preprocess_tensor(dataset, cache_path="cached_images.pt"):
     if os.path.exists(cache_path):
@@ -91,7 +97,6 @@ def setup():
     images = images_tensor.numpy()
 
 
-
 """"
 Function that splits dataset into train and test datasets
 @dataset, the entire dataset
@@ -103,9 +108,11 @@ def split_data(dataset, ratio):
 
     return train_data_x,test_data_x,train_data_y,test_data_y
     
-
+"""
+Count the amount of images per label, and create a bar plot, result saved to Images folder
+"""
 def class_counts():
-    #count the occurances per label
+
     class_counts = Counter(labels)
 
     #print the outcome
