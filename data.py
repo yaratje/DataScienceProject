@@ -62,7 +62,7 @@ Additionally, added caching of all the valid file paths as a json file cause fil
 """
 def setup():
     #TRANSFORM from assignment 2
-    global dataset, dataloader, labels, images
+    global dataset, dataloader, labels, images, unique_labels
 
     transform = transforms.Compose([transforms.Resize(32), transforms.CenterCrop(32), transforms.ToTensor(), transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
     dataset = ImageFolder(root="./Incidents-subset", transform=transform, loader=tryloader)
@@ -91,7 +91,7 @@ def setup():
     dataloader = DataLoader(dataset, batch_size=32, shuffle=True, num_workers=4)
     
     labels = np.array(dataset.targets)
-    
+    unique_labels = sorted(set(dataset.targets))
     images_tensor = preprocess_tensor(dataset, cache_path="cached_images.pt")
     #feel like i need em in np array
     images = images_tensor.numpy()
@@ -128,8 +128,35 @@ def class_counts():
     plt.tight_layout()
     plt.savefig("Images/class_count_barplot.jpg")
 
+"""
+Get 4 images per class, display them, result saved to Images folder
+"""
+def four_images():
+    samples = {cls: [] for cls in unique_labels}
+
+    #collect all 4 imagages for each label
+    for img, label in dataset:
+        if len(samples[label]) < 4:
+            samples[label].append(img)
+        if all(len(img_list) == 4 for img_list in samples.values()):
+            break 
+
+    fig, axes = plt.subplots(len(unique_labels), 4, squeeze=False, figsize=(12, 3*len(unique_labels)))
+    for row, cls in enumerate(unique_labels):
+            for col in range(4):
+                ax = axes[row, col]
+                # Transpose image dimensions, denormalizing it for the sake of displaying, maybe should do this differently :()
+                img = samples[cls][col]
+                ax.imshow(np.transpose(img*0.5 + 0.5, (1, 2, 0)))
+                ax.set_xticks([])
+                ax.set_yticks([])
+            axes[row, 0].set_ylabel(cls, rotation=0, labelpad=50, fontsize=12, ha="right", va="center")
+    plt.suptitle("Sample Images from Each Class", fontsize=16, fontweight="bold")
+    plt.savefig("Images/4img.jpg")
+
 
 if __name__ == '__main__':
     setup()
-    class_counts()
-    train_data_x, test_data_x , train_data_y, test_data_y = split_data(dataset, 0.2)
+    #class_counts()
+    four_images()
+    #train_data_x, test_data_x , train_data_y, test_data_y = split_data(dataset, 0.2)
