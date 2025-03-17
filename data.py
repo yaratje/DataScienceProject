@@ -12,7 +12,8 @@ from collections import Counter
 from PIL import Image
 import json, os
 import matplotlib.pyplot as plt
-
+import pandas as pd
+import cv2
 
 def save_valid_samples(valid_samples, cache_file):
     with open(cache_file, "w") as f:
@@ -102,7 +103,7 @@ Function that splits dataset into train and test datasets
 @dataset, the entire dataset
 @ratio, ratio beteen 0-1 what the split should be (for this project set to 0.2/0.8 test/train)
 """
-def split_data(dataset, ratio):
+def split_data(ratio):
     #stratify=labels = balanced labels distribution :O
     train_data_x,test_data_x,train_data_y,test_data_y = train_test_split(images,labels, test_size=ratio, stratify=labels)
 
@@ -155,8 +156,26 @@ def four_images():
     plt.savefig("Images/4img.jpg")
 
 
+def intra_corr():
+    data_mean = {}
+    data_std = {}
+    
+    for img, label in dataset:
+        mean, std = cv2.meanStdDev(np.array(img, dtype=np.float32))
+        #mean feature per label, set label if not in dict yet
+        data_mean.setdefault(label, []).append(np.squeeze(mean))  
+        data_std.setdefault(label,[]).append(np.squeeze(std))
+    df_class_means = pd.DataFrame({label: np.mean(means, axis=0) for label, means in data_mean.items()})
+    df_class_std = pd.DataFrame({label: np.mean(std, axis=0) for label, std in data_std.items()})
+
+
+    #save correlation matrix
+    df_class_means.corr().to_csv("Results/correlation_matrix_mean.csv")
+    df_class_std.corr().to_csv("Results/correlation_matrix_std.csv")
+
 if __name__ == '__main__':
     setup()
+    intra_corr()
     #class_counts()
-    four_images()
-    #train_data_x, test_data_x , train_data_y, test_data_y = split_data(dataset, 0.2)
+    #four_images()
+    #train_data_x, test_data_x , train_data_y, test_data_y = split_data(0.2)
