@@ -14,6 +14,8 @@ import json, os
 import matplotlib.pyplot as plt
 import pandas as pd
 import cv2
+from silloutte_score import cal_sil_score
+
 
 def save_valid_samples(valid_samples, cache_file):
     with open(cache_file, "w") as f:
@@ -156,12 +158,15 @@ def four_images():
     plt.savefig("Images/4img.jpg")
 
 
+"""
+Calculate the intra corralation of both the mean and the standard deviation, save as csv, (Excel used to generate image)
+"""
 def intra_corr():
     data_mean = {}
     data_std = {}
     
     for img, label in dataset:
-        mean, std = cv2.meanStdDev(np.array(img, dtype=np.float32))
+        mean, std = cv2.meanStdDev(np.asarray(img, dtype=np.float32))
         #mean feature per label, set label if not in dict yet
         data_mean.setdefault(label, []).append(np.squeeze(mean))  
         data_std.setdefault(label,[]).append(np.squeeze(std))
@@ -172,10 +177,14 @@ def intra_corr():
     #save correlation matrix
     df_class_means.corr().to_csv("Results/correlation_matrix_mean.csv")
     df_class_std.corr().to_csv("Results/correlation_matrix_std.csv")
+    return data_mean, data_std
+
 
 if __name__ == '__main__':
     setup()
-    intra_corr()
+    mean, std = intra_corr()
+    cal_sil_score(mean)
+
     #class_counts()
     #four_images()
     #train_data_x, test_data_x , train_data_y, test_data_y = split_data(0.2)
