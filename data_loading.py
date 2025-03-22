@@ -3,7 +3,7 @@ All stuff related to data
 """
 
 import torch
-from sklearn.model_selection import train_test_split
+
 import numpy as np
 import torchvision.transforms as transforms
 from torchvision.datasets import ImageFolder
@@ -14,7 +14,6 @@ import json, os
 import matplotlib.pyplot as plt
 import pandas as pd
 import cv2
-from silloutte_score import cal_sil_score
 import random
 
 

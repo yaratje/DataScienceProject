@@ -4,9 +4,10 @@ from data_understanding import *
 
 def main():
     dataset, balanced_dataset, org_count, dataloader = load_data()
-    class_counts(balanced_dataset, org_count, dataset.classes)
-    intra_corr(dataloader)
-    four_images(dataloader, sorted(set(dataset.targets)))
+    #class_counts(balanced_dataset, org_count, dataset.classes)
+    #intra_corr(dataloader)
+    #four_images(dataloader, sorted(set(dataset.targets)))
+    cal_sil_score(dataloader)
 
 
 def get_dataloader():

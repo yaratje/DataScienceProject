@@ -5,7 +5,9 @@ from collections import Counter
 import matplotlib.pyplot as plt
 import pandas as pd
 import cv2
-
+import matplotlib.cm as cm
+from sklearn.datasets import make_blobs
+from sklearn.metrics import silhouette_samples, silhouette_score
 
 """
 Calculate the intra corralation of both the mean and the standard deviation, save as csv.
@@ -107,6 +109,64 @@ def split_data(ratio, dataset):
 
     return train_data_x,test_data_x,train_data_y,test_data_y
     
+
+
+
 """
-Count the amount of images per label, and create a bar plot, result saved to Images folder
-"""
+Visualization code adapted from: https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html#sphx-glr-auto-examples-cluster-plot-kmeans-silhouette-analysis-py
+Takes dataloader and uses intra_corr method to calculate data_mean which is used for the silloute score.
+""" 
+def cal_sil_score(dataset):
+    # Compute feature vectors (means) for each sample in the dataset
+    data_mean, _ = intra_corr(dataset)
+    
+    # Combine the features from all classes into X and y arrays
+    X, y = [], []
+    for label, means in data_mean.items():
+        for feat in means:
+            X.append(feat)
+            y.append(label)
+    X = np.array(X)
+    y = np.array(y)
+    
+    # Compute overall silhouette score
+    silhouette_avg = silhouette_score(X, y)
+    print(f"Overall Silhouette Score: {silhouette_avg:.4f}")
+    
+    # Compute silhouette values for each sample
+    sample_silhouette_values = silhouette_samples(X, y)
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(18, 7))
+    
+    # Silhouette plot setup
+    ax1.set_xlim([-1, 1])
+    ax1.set_ylim([0, len(X) + (len(np.unique(y)) + 1) * 10])
+    
+    y_lower = 10
+    for i, label in enumerate(np.unique(y)):
+        ith_silhouette_vals = sample_silhouette_values[y == label]
+        ith_silhouette_vals.sort()
+        size_cluster_i = ith_silhouette_vals.shape[0]
+        y_upper = y_lower + size_cluster_i
+        color = cm.nipy_spectral(float(i) / len(np.unique(y)))
+        ax1.fill_betweenx(np.arange(y_lower, y_upper),0, ith_silhouette_vals,facecolor=color, edgecolor=color, alpha=0.7)
+        ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(label))
+        y_lower = y_upper + 10  # gap between clusters
+
+    ax1.set_title("Silhouette Plot for Dataset")
+    ax1.set_xlabel("Silhouette Coefficient Values")
+    ax1.set_ylabel("Cluster Label")
+    ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+    ax1.set_yticks([])
+    ax1.set_xticks([-0.1, 0, 0.2, 0.4, 0.6, 0.8, 1])
+    
+    # Scatter plot of the dataset features colored by class label
+    colors = cm.nipy_spectral(y.astype(float) / len(np.unique(y)))
+    ax2.scatter(X[:, 0], X[:, 1], marker=".", s=30, lw=0, alpha=0.7, c=colors, edgecolor="k")
+    ax2.set_title("Dataset Visualization with Ground-Truth Labels")
+    ax2.set_xlabel("Feature 1")
+    ax2.set_ylabel("Feature 2")
+    
+    plt.suptitle("Silhouette Analysis of Dataset", fontsize=14, fontweight="bold")
+    plt.savefig("Images/silscore.png")
+
