@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import cv2
 import random
+from sklearn.model_selection import train_test_split
 
 
 #Utility functions
@@ -126,6 +127,7 @@ def augi(batch):
     return torch.stack(images), torch.tensor(labels)
 
 
+
 """"
 Setup basic variables, get dataset from local folder, create dataloader, and extract labels and images for later use
 Additionally, added caching of all the valid file paths as a json file cause filtering the dataset took long, so if file exists, load from there
@@ -157,12 +159,27 @@ def setup():
 
 
 
+""""
+Function that splits dataset into train and test datasets
+@dataset, the entire dataset
+@ratio, ratio beteen 0-1 what the split should be (for this project set to 0.2/0.8 test/train)
+"""
+def split_data(ratio, dataset):
+    train_size = int(0.8 * len(dataset))  # 80% for training
+    test_size = len(dataset) - train_size  # Remaining 20% for testing
+    train_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, test_size])
+    return train_dataset, test_dataset
+    
+
+
 def get_dataset():
     dataset = setup()
     balanced_dataset, org_count = balance_classes(dataset)
+    train, test = split_data(0.8, balanced_dataset)
     
     sample = lambda batch: augi(batch)
     
-    dataloader = DataLoader(balanced_dataset, batch_size=64, shuffle=True, num_workers=8, pin_memory=True, collate_fn=sample)
+    dataloader_train = DataLoader(train, batch_size=64, shuffle=True, num_workers=8, pin_memory=True, collate_fn=sample)
+    dataloader_test = DataLoader(test, batch_size=64, shuffle=True, num_workers=8, pin_memory=True, collate_fn=sample)
 
-    return dataset, balanced_dataset, org_count, dataloader
+    return dataset, balanced_dataset, org_count, dataloader_train, dataloader_test

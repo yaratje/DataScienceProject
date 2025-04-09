@@ -1,0 +1,18 @@
+Dataset:
+Through text and adding a table quantifying the categories. 
+Include sample images that describe the categories in dataset. 
+You should also describe the dataset cleaning process 
+data split implemented
+
+Model:
+finetune
+
+Validation:
+k-fold cross validation.
+assess performance, start with accuracy, balanced accuracy, f-score, precision, and recall.
+confusion matrix, describe the misclassifications of your model.
+Present examples of correctly and incorrectly classified samples
+
+
+Other:
+Figure of your proposed framework (stages the data goes through) that will help you better preset it to the reader, in combination with the text description. 

@@ -1,13 +1,13 @@
 
-from sklearn.model_selection import train_test_split
 import numpy as np
 from collections import Counter
 import matplotlib.pyplot as plt
 import pandas as pd
 import cv2
 import matplotlib.cm as cm
-from sklearn.datasets import make_blobs
 from sklearn.metrics import silhouette_samples, silhouette_score
+from sklearn.decomposition import PCA
+import seaborn as sns
 
 """
 Calculate the intra corralation of both the mean and the standard deviation, save as csv.
@@ -97,19 +97,6 @@ def class_counts(balanced_list, org_count, class_names):
 
 
 
-""""
-Function that splits dataset into train and test datasets
-@dataset, the entire dataset
-@ratio, ratio beteen 0-1 what the split should be (for this project set to 0.2/0.8 test/train)
-"""
-def split_data(ratio, dataset):
-    labels = np.array(dataset.targets)
-    #stratify=labels = balanced labels distribution :O
-    train_data_x,test_data_x,train_data_y,test_data_y = train_test_split(dataset.samples,labels, test_size=ratio, stratify=labels)
-
-    return train_data_x,test_data_x,train_data_y,test_data_y
-    
-
 
 
 """
@@ -169,4 +156,92 @@ def cal_sil_score(dataset):
     
     plt.suptitle("Silhouette Analysis of Dataset", fontsize=14, fontweight="bold")
     plt.savefig("Images/silscore.png")
+
+
+def PCA2D(dataloader):
+    features = []
+    labels = []
+
+    for images, targets in dataloader:
+        images = images.view(images.size(0), -1)  #flatten images
+        features.append(images.numpy())  
+        labels.extend(targets.numpy())
+
+    #nparrays
+    X = np.vstack(features)
+    labels = np.array(labels)
+    #Make dataframe
+    feat_cols = ['pixel' + str(i) for i in range(X.shape[1])]
+    df_cifar = pd.DataFrame(X, columns=feat_cols)
+    df_cifar['Label'] = labels
+
+    #PCA
+    pca_cifar = PCA(n_components=2)
+    pca_result = pca_cifar.fit_transform(df_cifar.iloc[:, :-1])
+    principal_cifar_Df = pd.DataFrame(data=pca_result, columns=['Principal Component 1', 'Principal Component 2'])
+    principal_cifar_Df['Label'] = labels
+
+    plt.figure(figsize=(10,7))
+    sns.scatterplot(
+        x="Principal Component 1", y="Principal Component 2",
+        hue="Label",
+        palette=sns.color_palette("Set3", len(set(labels))),
+        data=principal_cifar_Df,
+        legend="full",
+        alpha=1.0
+    )
+    plt.title("2D PCA")
+    plt.savefig("Images/2dpca.png")
+
+
+def PCA3D(dataloader):
+    features = []
+    labels = []
+
+    for images, targets in dataloader:
+        images = images.view(images.size(0), -1)  #flatten images
+        features.append(images.numpy())  
+        labels.extend(targets.numpy())
+
+    #nparrays
+    X = np.vstack(features)
+    labels = np.array(labels)
+    #Make dataframe
+    feat_cols = ['pixel' + str(i) for i in range(X.shape[1])]
+    df_cifar = pd.DataFrame(X, columns=feat_cols)
+    df_cifar['Label'] = labels
+    pca_cifar = PCA(n_components = 3)
+    principalComponents_cifar = pca_cifar.fit_transform(df_cifar.iloc[:, :-1])
+    principal_cifar_Df = pd.DataFrame(data = principalComponents_cifar,columns = ['Principal Component 1', 'Principal Component 2','Principal Component 3'])
+    principal_cifar_Df['Label'] = labels
+    principal_cifar_Df.head()
+
+    # Create a 3D figure
+    fig = plt.figure(figsize=(10, 7))
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Scatter plot with colors based on labels
+    scatter = ax.scatter(
+        principal_cifar_Df["Principal Component 1"],
+        principal_cifar_Df["Principal Component 2"],
+        principal_cifar_Df["Principal Component 3"],
+        c=principal_cifar_Df["Label"],  # Color by label
+        cmap="Set3",  
+        alpha=1.0
+    )
+    unique_labels = np.unique(labels)
+    legend_labels = unique_labels.astype(str)
+    legend_colors = [scatter.cmap(scatter.norm(label)) for label in unique_labels]
+
+    legend_patches = [plt.Line2D([0], [0], marker="o", color="w", markersize=8, markerfacecolor=col) for col in legend_colors]
+    ax.legend(legend_patches, legend_labels, title="Labels")
+
+    ax.set_xlabel("Principal Component 1")
+    ax.set_ylabel("Principal Component 2")
+    ax.set_zlabel("Principal Component 3")
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_zticks([])
+    plt.title("3D PCA Scatter Plot")
+    plt.savefig("Images/3dpca.png")
 
