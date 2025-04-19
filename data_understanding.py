@@ -71,6 +71,7 @@ Count the ammount of images per class, and compare before and after data augment
 
 def class_counts(balanced_list, org_count, class_names):
     #count images per class
+    print(len(balanced_list))
     balanced_labels = [label for (path, label, flag) in balanced_list]
     balanced_count = Counter(balanced_labels)
     

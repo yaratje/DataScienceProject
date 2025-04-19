@@ -4,12 +4,12 @@ from data_understanding import *
 
 def main():
     dataset, balanced_dataset, org_count, dataloader_train, dataloader_test = load_data()
-    #class_counts(balanced_dataset, org_count, dataset.classes)
+    class_counts(balanced_dataset, org_count, dataset.classes)
     #intra_corr(dataloader_train)
     #four_images(dataloader_train, sorted(set(dataset.targets)))
     #cal_sil_score(dataloader_train)
-    PCA2D(dataloader_train)
-    PCA3D(dataloader_test)
+    #PCA2D(dataloader_train)
+    #PCA3D(dataloader_test)
 
 
 def get_dataloader():

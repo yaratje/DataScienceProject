@@ -46,7 +46,7 @@ def tryloader(path):
 
 
 """
-Preprocess the images (load transform) and cache them as a tensor to save more time cause it takes to lonngg to transform every time.
+Preprocess the images (load transform) to save more time cause it takes to lonngg to transform every time.
 """  
 def preprocess_tensor(dataset, cache_path):
     if os.path.exists(cache_path):
@@ -82,7 +82,7 @@ def balance_classes(dataset):
         label = sample[1]
         label_to_samples.setdefault(label, []).append(sample)
 
-    #for each class, add images so classes are balanced, with true flag to know they need to be augmented.
+        #for each class, add images so classes are balanced, with true flag to know they need to be augmented.
     aug_counts = {}
     for label, count in original_counts.items():
         extra_needed = highest - count
@@ -90,9 +90,10 @@ def balance_classes(dataset):
         for _ in range(extra_needed):
             sample = random.choice(label_to_samples[label])
             balanced_list.append((sample[0], sample[1], True))
-    
 
     return balanced_list, original_counts
+
+
 
 
 def augi(batch):
